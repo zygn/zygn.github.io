@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>학점이수 계산기</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.8.0/css/bulma.min.css">
+    <script defer src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"></script>
+    <script type="text/javascript">
+        
+        var arrPoint3Name = ["전자회로",  "디지탈공학", "C언어", "기초전자실험",  "고급C언어", "고급응용프로그래밍", "선형대수", "전기자기학", "마이크로컴퓨터", "디지털공학실험", "컴퓨터구조", "고급정보통신영어", "해상이동통신실습", "정보통신실험", "모바일프로그래밍", "정보통신보안", "광통신공학", "현장실습3",  "캡스톤디자인", "이동통신실험", "디지탈통신실험", "영상처리", "현장실습1", "디지털신호처리"];
+        var arrPoint2Name = ["문학의이해", "비판적사고", "자연과학글쓰기"];
+        var reqPoint3Name = ["회로이론", "응용프로그래밍", "정보통신영어", "공학수학", "확률및랜덤변수", "신호및시스템", "컴퓨터네트워크", "통신이론", "디지털통신공학", "이동통신공학", "모바일네트워크", "대학영어1", "대학영어2", "수학1", "수학2", "정보통계학", "물리학1", "컴퓨터프로그래밍"]
+        
+        
+        
+    function func(){
+        var text = document.getElementById('myTextarea').value;
+        var threePoint = 0;
+        var twoPoint = 0;
+        var threeString = "";
+        var twoString = "";
+        var reqString = "";
+        var n = 0
+        
+        for(var i=0; i<arrPoint3Name.length; i++) {
+
+            if (text.indexOf(arrPoint3Name[i]) != -1) {
+                threePoint += 3;
+            } else {
+                if (n % 5 == 0) {
+                    threeString += ("<br>" + arrPoint3Name[i]);
+                }
+                else {
+                    threeString += (", " + arrPoint3Name[i]);
+                }
+                n += 1;
+            }
+        }
+        n = 0;
+        for (var k=0; k<arrPoint2Name.length; k++) {
+            if (text.indexOf(arrPoint2Name[k]) != -1) {
+                twoPoint += 2;
+            } else {
+                twoString += (", " + arrPoint2Name[k]);
+            }
+        }
+        n = 0;
+        for(var j=0; j<reqPoint3Name.length; j++) {
+            if (text.indexOf(reqPoint3Name[j]) != -1) {
+                threePoint += 3;
+            } else {
+                if (n % 5 == 0) {
+                    reqString += ("<br>" + reqPoint3Name[j]);
+                }
+                else {
+                    reqString += (", " + reqPoint3Name[j]);
+                }
+                n += 1;
+            }
+        }
+        if (((threePoint)/3 +(twoPoint)/2) == 45) {
+            temp = '<br><br> 다 들었습니다! <br><br><br> <img src="img/img1.jpg" width="400"> ';
+        } else {
+        temp = "<br>총 이수하신 학점은 " + (threePoint + twoPoint) + " 이며, 이수한 과목의 개수는 " + ((threePoint)/3 +(twoPoint)/2) + "과목 입니다. <br><br> 이수하지 않은 필수 이수 과목은, <strong>" + reqString + twoString + "</strong> 이며, <br><br> 이수하지 않은 전공 선택 과목은, <strong>" + threeString + "</strong> 입니다. " ;
+        }
+        document.getElementById("disp").innerHTML = temp;
+    }
+    </script>
+  </head>
+  <body>
+   <section class="hero is-medium is-primary is-bold">
+    <div class="hero-body">
+      <div class="container">
+        <h1 class="title">경상대학교 정보통신공학과 학점이수 계산기</h1>
+        <h2 class="subtitle">BETA) 16학번만 지원합니다.</h2>
+      </div>
+   </section>
+   <section class="section">
+    <div class="container is-fullhd">
+     <div class="tile is-ancestor">
+      <div class="tile is-4 is-vertical is-parent">
+       <div class="tile is-child box">
+         <div class="control">
+          <textarea id="myTextarea" class="textarea is-primary" rows="12" placeholder="여기에 과목을 입력해주세요."></textarea>
+          <br>
+          <button class="button is-primary is-fullwidth" onclick='func()'>Submit!</button>
+         </div>
+       </div>
+      </div>
+      <div class="tile is-parent">
+       <div class="tile is-child box">
+          <center><p id="disp"><br>과목명을 입력하시면 <br>본인이 얼마나 더 들어야 하는지 정리해드립니다~<br><br>
+          필수 이수과목(교양/전공), 이수학점, 졸업요건 등 계산가능 <br>
+              ex) 과목명 <strong>'응용프로그래밍'</strong>, <br><strong>'광통신공학<br>정보통신영어'</strong><br>
+          </p></center>
+       </div>
+      </div>
+     </div>
+    </div>
+   </section>
+  </body>
+  <script src="scripts/main.js"></script>
+  <footer class="footer">
+   <div class="content has-text-centered">
+    <p>
+      <strong>WEBSITE</strong> by <a href="https://github.com/zygn/">Yundo Choi</a>. The website content
+      is licensed <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY NC SA 4.0</a>.<br>
+        project start from "<a href="https://develup.goorm.io/">DevelUp</a>" thanks for visiting <3</p>
+        <a href="https://bulma.io"><img src="https://bulma.io/images/made-with-bulma.png" alt="Made with Bulma" width="128" height="24"></a>
+   </div>
+ </footer>
+</html>
